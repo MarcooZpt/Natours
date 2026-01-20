@@ -1,0 +1,145 @@
+.popup {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba($black-color, .8);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s;
+
+  @supports(backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)){
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba($primary-color, .5);
+  }
+
+  &_content {
+    @include absCenter;
+    width: 75%;
+    background-color: $white-color;
+    box-shadow: 0 2rem 4rem rgba($black-color, .2);
+    border-radius: 3px;
+    display: table;
+    overflow: hidden;
+
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    transition: all .4s .2s;
+
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  &_left {
+    width: 33.333333%;
+    display: table-cell;
+    overflow: hidden;
+  }
+
+  &_right {
+    width: 66.6666667%;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 3rem 5rem;
+  }
+
+  &_img {
+    display: block;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &_text {
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
+
+    column-count: 2;
+    column-gap: 4rem;
+    column-rule: 1px solid $primary-color;
+
+    hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  &:target {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &:target &_content {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  &_close {
+    &:link,
+    &:visited {
+      color: $primary-color;
+      position: absolute;
+      top: 2.5rem;
+      right: 2.5rem;
+      font-size: 3rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: all .2s;
+      line-height: 1;
+    }
+
+    &:hover {
+      color: $black-color;
+    }
+  }
+  @media (max-width: 56.25em) { // 900px
+  .popup {
+
+    &_content {
+      width: 90%;
+      display: block;
+    }
+
+    &_left {
+      width: 100%;
+      display: block;
+      height: 25rem;
+    }
+
+    &_right {
+      width: 100%;
+      display: block;
+      padding: 3rem;
+    }
+
+    &_text {
+      column-count: 2;
+    }
+  }
+}
+@media (max-width: 37.5em) { // 600px
+  .popup {
+
+    &_content {
+      width: 95%;
+    }
+
+    &_right {
+      padding: 2rem;
+    }
+
+    &_close {
+      &:link,
+      &:visited {
+        top: 1.5rem;
+        right: 1.5rem;
+        font-size: 2.5rem;
+      }
+    }
+  }
+}
+
+}

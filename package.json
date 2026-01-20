@@ -1,0 +1,29 @@
+{
+  "name": "natarousweb",
+  "version": "1.0.0",
+  "description": "natarousweb",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "sass:compile": "npx sass sass/main.scss css/style.css",
+    "devserver": "live-server",
+    "start": "npm run devserver & npm run watch:sass",
+    "compile:sass": "npx sass sass/main.scss css/style.comp.css",
+    "watch:sass": "npx sass sass/main.scss css/style.css --watch",
+    "concat:css": "concat -o css/style.concat.css css/icon-font.css css/style.comp.css",
+    "prefix:css": "postcss css/style.concat.css --use autoprefixer -b \"last 10 years\" -o css/style.prefix.css",
+    "compress:css": "npx sass css/style.prefix.css css/style.css --style compressed",
+    "build:css": "npm run sass:compile && npm run concat:css && npm run prefix:css && npm run compress:css"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.23",
+    "concat": "^1.0.3",
+    "postcss-cli": "^11.0.1",
+    "sass": "^1.97.2"
+  },
+  "dependencies": {
+    "live-server": "^1.2.2"
+  }
+}
